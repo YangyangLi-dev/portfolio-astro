@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation';
+import Hero from '../components/Hero.astro';
+import TechStack from '../components/TechStack';
+import ProjectsShowcase from '../components/ProjectsShowcase';
+import ExperienceTimeline from '../components/ExperienceTimeline';
+import BlogSection from '../components/BlogSection';
+import ContactForm from '../components/ContactForm';
+import ProjectsGrid from '../components/ProjectsGrid';
+import BlogGrid from '../components/BlogGrid';
+import { projects } from '../data/projects';
+import { blogPosts } from '../data/blog-posts';
+---
+
+<Layout title="Yangyang Li - Full-Stack Developer">
+  <Navigation client:load />
+  <main>
+    <Hero />
+    <ProjectsShowcase client:load />
+    <ExperienceTimeline client:load />
+    <ContactForm client:load />
+  </main>
+</Layout>

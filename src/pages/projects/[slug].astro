@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects';
+import Navigation from '../../components/Navigation';
+
+export function getStaticPaths() {
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} - Project Details`}>
+  <Navigation client:load />
+  <main class="pt-16">
+    <article class="max-w-4xl mx-auto px-4 py-12">
+      <img
+        src={project.image}
+        alt={project.title}
+        class="w-full h-[400px] object-cover rounded-xl mb-8"
+      />
+      
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-dark-text mb-4">
+        {project.title}
+      </h1>
+
+      <div class="flex flex-wrap gap-2 mb-8">
+        {project.technologies.map(tech => (
+          <span class="px-3 py-1 bg-gray-100 dark:bg-dark-card rounded-full text-sm">
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div class="prose dark:prose-invert max-w-none">
+        <h2>Problem Statement</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+
+        <h2>Solution Approach</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+
+        <h2>Technical Implementation</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+
+        <h2>Challenges and Learnings</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+      </div>
+
+      <div class="mt-12 flex gap-4">
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition"
+          >
+            View Live Demo
+          </a>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-primary hover:text-primary transition"
+          >
+            View Source Code
+          </a>
+        )}
+      </div>
+    </article>
+  </main>
+</Layout>
